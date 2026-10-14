@@ -1,6 +1,6 @@
 backend:
-  name: github
-  repo: mostafapsh/mostafapsh.github.io
+  name: turbo-github
+  turbo_site_id: 8abda61a-6bda-4f4a-9fcf-0998dd2173ba
   branch: main
 
 media_folder: "images"
