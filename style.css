@@ -471,3 +471,16 @@ footer a {
     padding: 10px 18px;
   }
 }
+
+.hero {
+  min-height: 450px;
+  background:
+    linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.55)),
+    url("AFD15954-55A9-4B03-A7A1-810CF18A8600.png") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  padding: 40px 20px;
+}
