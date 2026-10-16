@@ -13,7 +13,7 @@
     --bg: #080b12;
     --panel: #111722;
     --text: #f5f7ff;
-    --muted: #aab3c4;
+    --muted: #c0c8d8;
     --cyan: #5cf0d5;
     --purple: #9b87ff;
 }
@@ -45,7 +45,7 @@ a {
 }
 
 .container {
-    width: min(1120px, 90%);
+    width: min(1200px, 94%);
     margin: auto;
 }
 
@@ -55,7 +55,8 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 22px 0;
+    gap: 20px;
+    padding: 20px 0;
     border-bottom: 1px solid rgba(255,255,255,.1);
 }
 
@@ -77,22 +78,59 @@ nav {
 }
 
 .nav-links a {
-    transition: .3s;
+    transition: color .3s;
 }
 
 .nav-links a:hover {
     color: var(--cyan);
 }
 
-/* Hero */
+/* Main video banner */
 
-.hero {
-    min-height: 78vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 45px;
-    padding: 65px 0;
+.hero-banner {
+    position: relative;
+    width: 100%;
+    height: min(82vh, 850px);
+    min-height: 450px;
+    margin: 22px auto 0;
+    overflow: hidden;
+    isolation: isolate;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 18px;
+    background: #080b12;
+    box-shadow: 0 20px 80px rgba(0,0,0,.35);
+}
+
+.hero-banner video {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.hero-banner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+        to top,
+        rgba(4,7,14,.92) 0%,
+        rgba(4,7,14,.50) 40%,
+        rgba(4,7,14,.08) 100%
+    );
+    pointer-events: none;
+}
+
+.banner-content {
+    position: absolute;
+    right: 7%;
+    bottom: 9%;
+    left: 7%;
+    max-width: 700px;
 }
 
 .eyebrow {
@@ -102,20 +140,20 @@ nav {
     font-weight: bold;
 }
 
-h1 {
-    font-size: clamp(36px, 5vw, 65px);
+.banner-content h1 {
+    font-size: clamp(34px, 5.5vw, 68px);
     line-height: 1.5;
-    margin: 20px 0;
+    margin: 15px 0;
 }
 
-h1 span {
+.banner-content h1 span {
     color: var(--cyan);
-    text-shadow: 0 0 30px rgba(92,240,213,.2);
+    text-shadow: 0 0 30px rgba(92,240,213,.25);
 }
 
-.hero-text {
-    max-width: 530px;
-    color: var(--muted);
+.banner-content p {
+    max-width: 550px;
+    color: #e0e5f0;
     font-size: 16px;
 }
 
@@ -123,12 +161,12 @@ h1 span {
     display: flex;
     flex-wrap: wrap;
     gap: 13px;
-    margin-top: 30px;
+    margin-top: 25px;
 }
 
 .btn {
     display: inline-block;
-    padding: 12px 22px;
+    padding: 12px 23px;
     border-radius: 9px;
     font-size: 14px;
     font-weight: bold;
@@ -141,85 +179,16 @@ h1 span {
 }
 
 .btn-secondary {
-    border: 1px solid rgba(255,255,255,.2);
-    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.35);
+    background: rgba(255,255,255,.08);
+    backdrop-filter: blur(8px);
 }
 
 .btn:hover {
-    transform: translateY(-4px);
+    transform: translateY(-3px);
 }
 
-/* Main image */
-
-.visual {
-    position: relative;
-    min-height: 400px;
-    display: grid;
-    place-items: center;
-    perspective: 1000px;
-}
-
-.orbit {
-    position: absolute;
-    width: min(390px, 90%);
-    aspect-ratio: 1;
-    border: 1px solid rgba(92,240,213,.28);
-    border-radius: 50%;
-    animation: rotate 25s linear infinite;
-    box-shadow: 0 0 70px rgba(92,240,213,.07);
-}
-
-.orbit::before,
-.orbit::after {
-    content: "";
-    position: absolute;
-    inset: 25px;
-    border: 1px solid rgba(155,135,255,.35);
-    border-radius: 50%;
-}
-
-.orbit::after {
-    inset: 55px;
-    border-color: rgba(92,240,213,.2);
-}
-
-.hero-image {
-    display: block;
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,.15);
-    box-shadow:
-        0 20px 80px rgba(0,0,0,.45),
-        0 0 40px rgba(92,240,213,.12);
-    animation: float 6s ease-in-out infinite;
-}
-
-.float-card {
-    position: absolute;
-    z-index: 3;
-    padding: 10px 15px;
-    background: rgba(15,21,33,.95);
-    border: 1px solid rgba(255,255,255,.14);
-    border-radius: 10px;
-    font-size: 12px;
-    backdrop-filter: blur(12px);
-}
-
-.card-one {
-    top: 30px;
-    right: 0;
-}
-
-.card-two {
-    bottom: 30px;
-    left: 0;
-}
-
-/* Sections */
+/* Content sections */
 
 section.content {
     padding: 75px 0;
@@ -289,50 +258,60 @@ footer {
     font-size: 13px;
 }
 
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-12px);
-    }
-}
-
-@keyframes rotate {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
 /* Mobile */
 
 @media (max-width: 760px) {
-    .hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-        padding-top: 45px;
+    .container {
+        width: 94%;
     }
 
-    .hero-text {
-        margin: auto;
-    }
-
-    .buttons {
-        justify-content: center;
-    }
-
-    .visual {
-        min-height: 350px;
-        margin-top: 15px;
-    }
-
-    .hero-image {
-        max-width: 330px;
+    nav {
+        padding: 16px 0;
     }
 
     .nav-links {
         gap: 12px;
         font-size: 12px;
+    }
+
+    .logo {
+        font-size: 25px;
+    }
+
+    .hero-banner {
+        height: 72vh;
+        min-height: 480px;
+        max-height: 720px;
+        margin-top: 15px;
+        border-radius: 14px;
+    }
+
+    .hero-banner video {
+        object-position: center;
+    }
+
+    .banner-content {
+        right: 6%;
+        left: 6%;
+        bottom: 7%;
+    }
+
+    .banner-content h1 {
+        font-size: clamp(30px, 8vw, 44px);
+        line-height: 1.6;
+    }
+
+    .banner-content p {
+        font-size: 14px;
+    }
+
+    .buttons {
+        gap: 10px;
+    }
+
+    .btn {
+        padding: 11px 16px;
+        font-size: 13px;
     }
 
     .grid {
@@ -349,9 +328,8 @@ footer {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation: none !important;
-        scroll-behavior: auto !important;
+    html {
+        scroll-behavior: auto;
     }
 }
 </style>
@@ -361,144 +339,137 @@ footer {
 
 <div class="container">
 
-<nav>
-    <a class="logo" href="#">M<span>.</span></a>
+    <nav>
+        <a class="logo" href="#">M<span>.</span></a>
 
-    <div class="nav-links">
-        <a href="#about">درباره من</a>
-        <a href="#work">پروژه‌ها</a>
-        <a href="#contact">ارتباط</a>
-    </div>
-</nav>
-
-<header class="hero">
-
-    <div class="hero-content">
-
-        <div class="eyebrow">
-            CREATIVE DESIGNER · DIGITAL ART
+        <div class="nav-links">
+            <a href="#about">درباره من</a>
+            <a href="#work">پروژه‌ها</a>
+            <a href="#contact">ارتباط</a>
         </div>
+    </nav>
 
-        <h1>
-            ایده‌ها را به<br>
-            <span>تجربه‌های بصری</span><br>
-            تبدیل می‌کنم.
-        </h1>
+    <!-- Main video banner -->
 
-        <p class="hero-text">
-            به دنیای شخصی من خوش آمدید؛
-            فضایی برای نمایش خلاقیت، طراحی گرافیک،
-            هنر دیجیتال و پروژه‌های من.
-        </p>
+    <header class="hero-banner">
 
-        <div class="buttons">
-            <a class="btn btn-primary" href="#work">
-                مشاهده پروژه‌ها ↙
-            </a>
+        <video autoplay muted loop playsinline preload="metadata">
+            <source src="./video-output-78668C96-E83A-433C-9431-DC4FFFE3ADDD-1.mp4" type="video/mp4">
+            مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
+        </video>
 
-            <a class="btn btn-secondary" href="#about">
-                درباره من
-            </a>
-        </div>
+        <div class="banner-content">
 
-    </div>
+            <div class="eyebrow">
+                CREATIVE DESIGNER · DIGITAL ART
+            </div>
 
-    <div class="visual">
+            <h1>
+                ایده‌ها را به<br>
+                <span>تجربه‌های بصری</span><br>
+                تبدیل می‌کنم.
+            </h1>
 
-        <div class="orbit"></div>
-
-        <img
-            class="hero-image"
-            src="./880F87D8-6B57-451A-AB07-35EF75CC96A7.png"
-            alt="تصویر معرفی مصطفی"
-        >
-
-        <div class="float-card card-one">
-            ✦ خلاقیت بدون مرز
-        </div>
-
-        <div class="float-card card-two">
-            DESIGN · ART · IDEAS
-        </div>
-
-    </div>
-
-</header>
-
-<section class="content" id="about">
-
-    <h2 class="section-title">درباره من</h2>
-
-    <p class="section-subtitle">
-        خلاقیت، نگاه متفاوت و علاقه به دنیای طراحی.
-    </p>
-
-    <div class="card">
-        <p>
-            من مصطفی هستم. این وب‌سایت فضای شخصی من برای معرفی
-            خودم، نمایش فعالیت‌ها و به‌اشتراک‌گذاشتن پروژه‌ها
-            و ایده‌هایم است.
-        </p>
-    </div>
-
-</section>
-
-<section class="content" id="work">
-
-    <h2 class="section-title">فعالیت‌ها و پروژه‌ها</h2>
-
-    <p class="section-subtitle">
-        نمونه‌کارها و زمینه‌های مورد علاقه من.
-    </p>
-
-    <div class="grid">
-
-        <article class="card">
-            <div class="icon">✳</div>
-            <h3>طراحی گرافیک</h3>
             <p>
-                هویت بصری، ترکیب‌بندی، رنگ و ایده‌پردازی.
+                به دنیای شخصی من خوش آمدید؛
+                فضایی برای نمایش خلاقیت، طراحی گرافیک،
+                هنر دیجیتال و پروژه‌های من.
             </p>
-        </article>
 
-        <article class="card">
-            <div class="icon">◈</div>
-            <h3>هنر دیجیتال</h3>
-            <p>
-                تجربه‌های بصری، تصویرسازی و هنر دیجیتال.
-            </p>
-        </article>
+            <div class="buttons">
+                <a class="btn btn-primary" href="#work">
+                    مشاهده پروژه‌ها ↙
+                </a>
 
-        <article class="card">
-            <div class="icon">✦</div>
-            <h3>پروژه‌های خلاقانه</h3>
-            <p>
-                پروژه‌ها و ایده‌هایی که به‌مرور اینجا منتشر می‌شوند.
-            </p>
-        </article>
+                <a class="btn btn-secondary" href="#about">
+                    درباره من
+                </a>
+            </div>
 
-    </div>
+        </div>
 
-</section>
+    </header>
 
-<section class="content" id="contact">
+    <!-- About -->
 
-    <div class="contact-box">
+    <section class="content" id="about">
 
-        <h2 class="section-title">بیایید در ارتباط باشیم</h2>
+        <h2 class="section-title">درباره من</h2>
 
         <p class="section-subtitle">
-            راه‌های ارتباطی و شبکه‌های اجتماعی من در آینده
-            در این قسمت قرار می‌گیرند.
+            خلاقیت، نگاه متفاوت و علاقه به دنیای طراحی.
         </p>
 
-    </div>
+        <div class="card">
+            <p>
+                من مصطفی هستم. این وب‌سایت فضای شخصی من برای معرفی
+                خودم، نمایش فعالیت‌ها و به‌اشتراک‌گذاشتن پروژه‌ها
+                و ایده‌هایم است.
+            </p>
+        </div>
 
-</section>
+    </section>
 
-<footer>
-    © 2026 Mostafa — Creative Portfolio
-</footer>
+    <!-- Projects -->
+
+    <section class="content" id="work">
+
+        <h2 class="section-title">فعالیت‌ها و پروژه‌ها</h2>
+
+        <p class="section-subtitle">
+            نمونه‌کارها و زمینه‌های مورد علاقه من.
+        </p>
+
+        <div class="grid">
+
+            <article class="card">
+                <div class="icon">✳</div>
+                <h3>طراحی گرافیک</h3>
+                <p>
+                    هویت بصری، ترکیب‌بندی، رنگ و ایده‌پردازی.
+                </p>
+            </article>
+
+            <article class="card">
+                <div class="icon">◈</div>
+                <h3>هنر دیجیتال</h3>
+                <p>
+                    تجربه‌های بصری، تصویرسازی و هنر دیجیتال.
+                </p>
+            </article>
+
+            <article class="card">
+                <div class="icon">✦</div>
+                <h3>پروژه‌های خلاقانه</h3>
+                <p>
+                    پروژه‌ها و ایده‌هایی که به‌مرور اینجا منتشر می‌شوند.
+                </p>
+            </article>
+
+        </div>
+
+    </section>
+
+    <!-- Contact -->
+
+    <section class="content" id="contact">
+
+        <div class="contact-box">
+
+            <h2 class="section-title">بیایید در ارتباط باشیم</h2>
+
+            <p class="section-subtitle">
+                راه‌های ارتباطی و شبکه‌های اجتماعی من در آینده
+                در این قسمت قرار می‌گیرند.
+            </p>
+
+        </div>
+
+    </section>
+
+    <footer>
+        © 2026 Mostafa — Creative Portfolio
+    </footer>
 
 </div>
 
